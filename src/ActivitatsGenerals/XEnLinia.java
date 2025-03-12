@@ -1,9 +1,8 @@
 package ActivitatsGenerals;
 
-import java.security.PublicKey;
 import java.util.Scanner;
 
-public class TresEnLinia {
+public class XEnLinia {
 
     public enum VALOR {BUIDA, CERCLE, CREU};
     public static VALOR [][] tauler;
@@ -18,7 +17,7 @@ public class TresEnLinia {
 
     public static void main(String[] args){
         Scanner input = new Scanner (System.in);
-        inicialitzaPartida();
+        inicialitzaPartida(5);
         /* (PROVA) tauler[0][1] = VALOR.CREU;
         tauler[1][2] = VALOR.CERCLE; */
         mostrarTauler(tauler);
@@ -34,8 +33,8 @@ public class TresEnLinia {
 
     }
 
-    public static void inicialitzaPartida(){
-        tauler = new VALOR[3][3];
+    public static void inicialitzaPartida(int n){
+        tauler = new VALOR[n][n];
         for(int i= 0; i< tauler.length;i++){
             for(int j = 0; j< tauler[i].length; j++){
                 tauler[i][j]= VALOR.BUIDA;
@@ -85,18 +84,18 @@ public class TresEnLinia {
 
         }while(! tiradaValida(fila, col, tauler));
 
-        tauler[fila][col] = (t==TORN.JUGADOR_A)? VALOR.CREU : VALOR.CERCLE;
+        tauler[fila][col] = (t== TORN.JUGADOR_A)? VALOR.CREU : VALOR.CERCLE;
 
         numTirades++;
 
     }
 
     public static boolean tiradaValida(int f, int c, VALOR[][] t){
-        return(f>=0 && f<=2 && c>=0 && c<=2 && t[f][c] == VALOR.BUIDA);
+        return(f>=0 && f<=t.length-1 && c>=0 && c<=t.length-1 && t[f][c] == VALOR.BUIDA);
     }
 
     public static TORN canviaTorn(TORN t){
-        if (t==TORN.JUGADOR_A){
+        if (t== TORN.JUGADOR_A){
             return TORN.JUGADOR_B;
         }
         else {
@@ -106,35 +105,47 @@ public class TresEnLinia {
 
     public static RESULTAT comprovaResultat(VALOR[][] t ){
 
-        boolean guanya = false;
-        for(int f = 0; f<=2; f++){
-            if(t[f][0]==t[f][1]&&t[f][1]==t[f][2] && t[f][0]!=VALOR.BUIDA) {
-                guanya = true;
-                break;
+        boolean guanyaF = false;
+
+        for(int f = 0; f<=t.length-1; f++){
+            boolean b = true;
+            for(int c = 0; c<=t.length-1; c++){
+                b = b && (t[f][c]==t[f][c+1]&&t[f][c]!=VALOR.BUIDA);
             }
+            guanyaF = b || guanyaF;
+
         }
-        for(int c = 0; c<=2; c++){
-            if(t[0][c]==t[1][c]&&t[1][c]==t[2][c] && t[0][c]!=VALOR.BUIDA) {
-                guanya = true;
-                break;
+
+
+        boolean guanyaC= false;
+
+        for(int c = 0; c<=t.length-1; c++){
+            boolean b = true;
+            for (int f=0; f<t.length-1; f++){
+                b = b && (t[f][c]==t[f+1][c]&& t[f][c]!= VALOR.BUIDA);
             }
-        }
-        if(t[2][0]==t[1][1]&&t[1][1]==t[0][2] && t[1][1]!=VALOR.BUIDA) {
-            guanya = true;
+            guanyaC = b || guanyaC;
         }
 
-        if(t[0][0]==t[1][1]&&t[1][1]==t[2][2] && t[1][1]!=VALOR.BUIDA) {
-            guanya = true;
-
+        boolean guanyaDD = true;
+        for(int i = 0; i<t.length-1; i++){
+            guanyaDD = guanyaDD && (t[i][i]==t[i+1][i+1] && t[i][i]!=VALOR.BUIDA);
         }
 
-        if(guanya && torn==TORN.JUGADOR_A){
+        boolean guanyaDA = true;
+        for(int c = 0, f=t.length-1; c<t.length-1; c++, f--){
+            guanyaDA = guanyaDA && (t[f][c]==t[f-1][c+1] && t[f][c]!=VALOR.BUIDA);
+        }
+
+        boolean guanya = guanyaF || guanyaC || guanyaDD || guanyaDA;
+
+        if(guanya && torn== TORN.JUGADOR_A){
             return RESULTAT.GUANYADOR_A;
         }
-        else if(guanya && torn==TORN.JUGADOR_B){
+        else if(guanya && torn== TORN.JUGADOR_B){
             return RESULTAT.GUANYADOR_B;
         }
-        else if(!guanya && numTirades==9){
+        else if(!guanya && numTirades==t.length*t.length){
             return RESULTAT.EMPAT;
         }
         else{
@@ -143,11 +154,11 @@ public class TresEnLinia {
     }
 
     public static void mostrarResultat (RESULTAT r){
-        if(r==RESULTAT.EMPAT){
+        if(r== RESULTAT.EMPAT){
             System.out.println("Partida acabada en empat!!");
-        } else if(r==RESULTAT.GUANYADOR_A) {
+        } else if(r== RESULTAT.GUANYADOR_A) {
             System.out.println("Enhorabona jugador/a A!!");
-        } else if(r==RESULTAT.GUANYADOR_B) {
+        } else if(r== RESULTAT.GUANYADOR_B) {
             System.out.println("Enhorabona jugador/a B!!");
         }
         else {

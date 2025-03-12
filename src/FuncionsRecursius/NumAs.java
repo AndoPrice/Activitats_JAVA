@@ -1,9 +1,13 @@
 package FuncionsRecursius;
 
+import java.util.Scanner;
+
 public class NumAs {
     public static void main(String[] args) {
-        String s = "banana";
-        System.out.printf("Hi ha: %d 'a's", comptarAsRec(s));
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter word: ");
+        String s = input.next();
+        System.out.printf("There are: %d 'a's", comptarAsRec(s));
 
     }
     public static int comptarAsRec(String s){
