@@ -1,16 +1,19 @@
 package POO.Properties;
 
+import static java.lang.Float.MAX_VALUE;
+import static java.lang.Float.MIN_VALUE;
+
 public class Owner {
     private String name;
     private String address;
     private Prop[] props = new Prop[5];
     private int numProps;
 
-    public Owner(String name, String address, Prop[] props, int numProps) {
+    public Owner(String name, String address, Prop[] props) {
         this.name = name;
         this.address = address;
         this.props = props;
-        this.numProps = numProps;
+        this.numProps = 0;
     }
 
     public String getName() {
@@ -45,5 +48,50 @@ public class Owner {
         this.numProps = numProps;
     }
 
-    public
+    public void addProp (Prop p){
+        if(numProps<props.length) {
+            props[numProps] = p;
+            numProps++;
+        }
+    }
+
+    public float cheapestPrice(){
+        float cheapestPrice = MAX_VALUE;
+        for(int i = 0; i<numProps; i++){
+            if(props[i].getPrice()<cheapestPrice){
+                cheapestPrice = props[i].getPrice();
+            }
+        }
+        return cheapestPrice;
+    }
+
+    public float expensivePrice(){
+        float expensivePrice = 0;
+        for(int i = 0; i<numProps; i++){
+            if(props[i].getPrice()>expensivePrice){
+                expensivePrice = props[i].getPrice();
+            }
+        }
+        return expensivePrice;
+    }
+
+    public float averagePrices(){
+        float averagePrices = 0;
+        for(int i = 0; i<numProps; i++){
+            averagePrices += props[i].getPrice();
+        }
+        return averagePrices/numProps;
+    }
+
+    public String cheapestProp(){
+        float cheapestPrice = MAX_VALUE;
+        for(int i = 0; i<numProps; i++){
+            if(props[i].getPrice()<cheapestPrice){
+                cheapestPrice = props[i].getPrice();
+                int cheapestNum = numProps;
+            }
+        }
+        return props[numProps].getPropID();
+    }
+
 }
