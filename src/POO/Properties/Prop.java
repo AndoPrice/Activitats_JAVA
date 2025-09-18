@@ -6,11 +6,11 @@ public class Prop {
     private String city;
     private float price;
 
-    public Prop (String propID, String address, String city, float price){
+    public Prop (String propID, String address, String city){
         this.propID = propID;
         this.address = address;
         this.city = city;
-        this.price = price;
+        this.price = 0.0f;
     }
 
     public void setPropID(String propID){
@@ -50,6 +50,6 @@ public class Prop {
     }
 
     public boolean sameCity (Prop p){
-        return city == p.city;
+        return city.equals(p.city);
     }
 }

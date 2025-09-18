@@ -1,7 +1,6 @@
 package POO.Properties;
 
 import static java.lang.Float.MAX_VALUE;
-import static java.lang.Float.MIN_VALUE;
 
 public class Owner {
     private String name;
@@ -92,6 +91,36 @@ public class Owner {
             }
         }
         return props[numProps].getPropID();
+    }
+
+    /*public void sort (int[]x){
+        boolean ordenat = false;
+        while(!ordenat){
+            ordenat = true;
+            for(int i=0;i<x.length; i++){
+                if(x[i]<x[i+1]){
+                    int temp = x[i];
+                    x[i] = x[i+1];
+                    x[i+1]= temp;
+                    ordenat = false;
+                }
+            }
+        }
+    }*/
+
+    public void sortPropsByPrice(){
+        boolean ordenat = false;
+        while(!ordenat){
+            ordenat = true;
+            for(int i=0;i<numProps-1; i++){
+                if(props[i].getPrice()<props[i+1].getPrice()){
+                    Prop temp = props[i];
+                    props[i] = props[i+1];
+                    props[i+1]= temp;
+                    ordenat = false;
+                }
+            }
+        }
     }
 
 }

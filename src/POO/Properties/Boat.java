@@ -5,9 +5,9 @@ public class Boat extends Prop{
     private float length;
     private boolean navigable;
 
-    public Boat(String propID, String address, String city, float price, boolean navigable, float length) {
-        super(propID, address, city, price);
-        this.navigable = navigable;
+    public Boat(String propID, String address, String city, float length) {
+        super(propID, address, city);
+        this.navigable = true;
         this.length = length;
     }
 
