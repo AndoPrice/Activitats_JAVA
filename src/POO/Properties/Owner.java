@@ -8,10 +8,10 @@ public class Owner {
     private Prop[] props = new Prop[5];
     private int numProps;
 
-    public Owner(String name, String address, Prop[] props) {
+    public Owner(String name, String address) {
         this.name = name;
         this.address = address;
-        this.props = props;
+        this.props = new Prop[5];
         this.numProps = 0;
     }
 

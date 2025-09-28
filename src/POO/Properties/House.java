@@ -19,11 +19,11 @@ public class House extends Prop{
         this.numRooms = numRooms;
     }
 
-    public boolean isSwimmingpool() {
+    public boolean isSwimmingPool() {
         return swimmingpool;
     }
 
-    public void setSwimmingpool(boolean swimmingpool) {
+    public void setSwimmingPool(boolean swimmingpool) {
         this.swimmingpool = swimmingpool;
     }
 }

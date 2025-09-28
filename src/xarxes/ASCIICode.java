@@ -59,7 +59,7 @@ public class ASCIICode {
         }
     }
 
-    public static String xifrar(String original, int shift){ }
+    //public static String xifrar(String original, int shift){ }
 
-    public static String desxifrar(String xifrat, int shift){ }
+    //public static String desxifrar(String xifrat, int shift){ }
 }
