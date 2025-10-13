@@ -1,4 +1,4 @@
-package Swapping.Versio2;
+package Swapping.Versio3;
 
 import processing.core.PApplet;
 
@@ -9,7 +9,7 @@ public class Swapping extends PApplet {
     Memory memory;
 
     public static void main(String[] args) {
-        PApplet.main("Swapping.Versio2.Swapping");
+        PApplet.main("Swapping.Versio3.Swapping");
     }
 
     public void settings() {
@@ -39,29 +39,30 @@ public class Swapping extends PApplet {
         if(frameCount == 100){
             memory.swapIn(p1);
         }
-        if(frameCount == 200){
+        else if(frameCount == 200){
             memory.swapIn(p2);
         }
-        if(frameCount == 300){
+        else if(frameCount == 300){
             memory.swapIn(p3);
         }
-        if(frameCount == 400){
+        else if(frameCount == 400){
             memory.swapOut(p1);
         }
-        if(frameCount == 500){
+        else if(frameCount == 500){
             memory.swapIn(p4);
         }
-        if(frameCount == 600){
+        else if(frameCount == 600){
             memory.swapOut(p3);
         }
-        if(frameCount == 700){
+        else if(frameCount == 700){
             memory.swapIn(p5);
         }
 
+    }
 
-
-
-
-
+    public void keyPressed(){
+        if(key=='c' || key=='C'){
+            memory.compacta();
+        }
     }
 }

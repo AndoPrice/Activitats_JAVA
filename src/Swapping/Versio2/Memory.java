@@ -7,7 +7,6 @@ public class Memory {
     int mida;
     Proces[] procesos;
     int numProcesos;
-    int freeAddress;
 
     Hole[] holes;
     int numHoles = 0;
@@ -16,10 +15,10 @@ public class Memory {
         this.mida = m;
         procesos = new Proces[100];
         numProcesos = 0;
-        freeAddress = 0;
 
         numHoles = 0;
         holes = new Hole [100];
+        addHole(0, mida);
     }
 
     void addHole(int a, int m){
@@ -30,7 +29,7 @@ public class Memory {
 
     void swapIn(Proces p){
         boolean swapped = false;
-        for(int i = 0; i<numHoles; i++){
+        for(int i = 0; i<numHoles && !swapped; i++){
             if(holes[i]!=null && holes[i].mida >= p.mida){
                 int espaiRestant = holes[i].mida -p.mida;
                 procesos[numProcesos] = p;
@@ -40,14 +39,16 @@ public class Memory {
                 System.out.println("SWAPPED IN "+p.nom);
 
                 holes[i].address = holes[i].address +p.mida;
-                holes[i].mida = p.mida-espaiRestant;
+                holes[i].mida = espaiRestant;
                 if(holes[i].mida == 0){
                     holes[i] = null;
                     System.out.println("Hole Removed");
                 }
             }
         }
-
+        if(!swapped){
+            System.out.println("ERROR ");
+        }
     }
 
     void swapOut (Proces p){
@@ -106,6 +107,16 @@ public class Memory {
             }
         }
         return numProcessos;
+    }
+
+    int numForats(){
+        int numForats = 0;
+        for(int i = 0; i<holes.length; i++) {
+            if (holes[i] != null) {
+                numForats++;
+            }
+        }
+        return numForats;
     }
 
 }
