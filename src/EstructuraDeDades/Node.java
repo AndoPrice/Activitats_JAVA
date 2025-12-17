@@ -1,0 +1,52 @@
+package EstructuraDeDades;
+
+import processing.core.PApplet;
+
+public class Node {
+
+    int valor;
+    Node seg;
+
+    Node(int v) {
+        this.valor = v;
+        this.seg = null;
+    }
+
+    // Constructor (2): quan sí sabem qui és el seguent node
+    Node(int v, Node sn) {
+        this.valor = v;
+        this.seg = sn;
+    }
+
+    // Getters
+    int getValor() {
+        return this.valor;
+    }
+
+    Node getSegNode() {
+        return this.seg;
+    }
+
+    // Dibuixa el node
+    void display(PApplet p5, float x, float y, float w) {
+
+        p5.fill(255);
+        p5.rect(x, y, w, w);
+
+        p5.fill(0);
+        p5.textAlign(p5.CENTER);
+        p5.text(this.valor, x + w / 2, y + w / 2 + 10);
+
+        if (this.seg != null) {
+            p5.line(x + w, y + w / 2, x + 2 * w, y + w / 2);
+            p5.fill(0);
+            p5.triangle(x + 2 * w, y + w / 2,
+                    x + 2 * w - w / 4, y + w / 2 - w / 4,
+                    x + 2 * w - w / 4, y + w / 2 + w / 4);
+        } else {
+            p5.line(x + w / 2, y + w, x + w / 2, y + 2 * w);
+            p5.circle(x + w / 2, y + 2 * w, 10);
+            p5.text("TAIL", x + w / 2, y + 2 * w + 50);
+        }
+    }
+}
