@@ -100,21 +100,23 @@ public class LlistaNodes {
         }
     }
 
-    public int removeAt(int p){
-        if(!isEmpty() && p<numNodes){
-            int k=0;
+    public int removeAt(int p) {
+        if (!isEmpty() && p < numNodes) {
+            int k = 0;
             Node nodeAnt = head;
-            while(k<p-1){
+            while (k < p - 1) {
                 nodeAnt = nodeAnt.seg;
                 k++;
             }
 
         }
         int v = -1;
-        if(numNodes>1){
+        if (numNodes > 1) {
 
         }
+        return v;
     }
+
 
     public int removeLast(){
         if(!isEmpty()){
