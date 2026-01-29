@@ -53,6 +53,63 @@ public class ArbreBST {
             display(p5, n.dret, x+dx, y + 2*r, r, level +1);
         }
     }
+    boolean cercaElement(int valor, NodeBST n){
+        if(n==null){ return false; }
+        else if(n.valor == valor){ return true;}
+        else {
+            if(n.esq!=null && valor < n.valor){
+                return cercaElement(valor, n.esq);
+            }
+            else if(n.dret!=null && valor > n.valor){
+                return cercaElement(valor, n.dret);
+            }
+            else { return false; }
+        }
+    }
+
+    int getMinim(){
+        NodeBST pare = this.arrel;
+        while (pare.esq!=null) {
+            pare = pare.esq;
+        }
+        return pare.valor;
+    }
+
+    int getMaxim(){
+        NodeBST pare = this.arrel;
+        while (pare.dret!=null) {
+            pare = pare.dret;
+        }
+        return pare.valor;
+    }
+
+    public void bfs(NodeBST node, int valor){
+        System.out.println("");
+        CuaNodeBST c =new CuaNodeBST();
+        node.setVisitat(true);
+        c.encola(node);
+        while(!c.isEmpty()){
+            NodeBST nodeActual = c.desencola();
+            nodeActual.visitar();
+            if(nodeActual.valor == valor){
+                System.out.println("TROBAT!!");
+            }
+            for(NodeBST fill : adjacents(nodeActual)){
+                if(fill!=null && !fill.visitat){
+                    fill.setVisitat(true);
+                    c.encola(fill);
+                }
+            }
+
+        }
+    }
+
+    public NodeBST[] adjacents(NodeBST n){
+        NodeBST[] nodes = new NodeBST[2];
+        nodes[0] = n.esq;
+        nodes[1] = n.dret;
+        return nodes;
+    }
 
 
 
